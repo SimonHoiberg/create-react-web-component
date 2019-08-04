@@ -20,7 +20,7 @@ Create React Web Component will boostrap a basic setup for creating a React App 
 
 ## Getting Started
 
-#### Setup
+### Setup
 Get started by running the command
 ```console
 npx create-react-web-component
@@ -112,6 +112,37 @@ const App: React.FC = () => {
 export default withStyles(styles)(App);
 ```
 This will have the exactly same effect, so it's simply a matter of preference.
+
+### Build
+Build you component by running the command
+```console
+yarn run build
+```
+or 
+```console
+npm run build
+```
+
+This will create a dist-folder containing a `main.js` file.  
+In order to use your Web Component, simply import this file in a project, and use your Web Component as:
+```html
+<my-react-web-component 
+  title="Cool Component" 
+  color="red"
+>
+</my-react-web-component>
+```
+
+### Serve
+For development, you can serve the `main.js` file using the command:
+```console
+yarn run serve
+```
+or
+```console
+npm run serve
+```
+This will serve your file on `http://localhost:5000/main.js`
 
 ## Contributing
 
