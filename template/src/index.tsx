@@ -4,8 +4,6 @@ import root from 'react-shadow';
 import { EventProvider } from './utils/EventContext';
 import App from './App';
 
-export interface IElementAttributes {}
-
 /**
  * The Web Component will be wrapping the React App, and will be defined as a Custom Element.
  *
@@ -23,6 +21,9 @@ export interface IElementAttributes {}
  *      title: this.getAttribute('title),
  *    }
  */
+
+export interface IElementAttributes {}
+
 class %component-name-pascal% extends HTMLElement {
   private elementAttributes: IElementAttributes = {};
 

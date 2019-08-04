@@ -12,26 +12,33 @@ interface INames {
 }
 
 export async function cli() {
-  const options= await promptForQuestions() as any;
-  const names = {
-    title: toTitleFormat(options.name),
-    pascal: toPascalCase(options.name),
-    snake: toSnakeCase(options.name),
+  try {
+    const options= await promptForQuestions() as any;
+    const names = {
+      title: toTitleFormat(options.name),
+      pascal: toPascalCase(options.name),
+      snake: toSnakeCase(options.name),
+    }
+
+    const projectDirectory = await copyTemplate(options.directory); 
+    await writeComponentName(projectDirectory, names);
+
+    console.log('');
+    console.log('Your project is ready!');
+    console.log('To get started:');
+    console.log('');
+    console.log(`   cd ${options.directory}`);
+    console.log(`   yarn install`);
+    console.log(`   yarn start`);
+    console.log('');
+    console.log('The project will be running at localhost:3000');
+    console.log('');
   }
-
-  const projectDirectory = await copyTemplate(options.directory); 
-  await writeComponentName(projectDirectory, names);
-
-  console.log('');
-  console.log('Your project is ready!');
-  console.log('To get started:');
-  console.log('');
-  console.log(`   cd ${options.directory}`);
-  console.log(`   yarn install`);
-  console.log(`   yarn start`);
-  console.log('');
-  console.log('The project will be running at localhost:3000');
-  console.log('');
+  catch (err) {
+    console.log('');
+    console.log('Something went wrong while setting up your project');
+    console.log('ERROR: ' + err.message);
+  }
 }
 
 async function promptForQuestions() {

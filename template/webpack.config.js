@@ -2,6 +2,9 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
+const isProduction = process.env.NODE_ENV === 'production';
+const urlPath = isProduction ? process.env.PUBLIC_PATH : '';
+
 module.exports = {
   entry: resolve(__dirname, './src/index.tsx'),
   resolve: {
@@ -27,6 +30,18 @@ module.exports = {
             loader: 'css-loader',
           },
         ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|otf|ico|mp4)(\?\S*)?$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets/',
+            publicPath: `${urlPath}assets/`,
+            name: '[folder]/[name].[ext]',
+            cachecDirectory: true,
+          }
+        },
       },
     ],
   },
