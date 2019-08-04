@@ -12,36 +12,64 @@ import App from './App';
  * Example:
  *    {
  *      title: string;
+ *      customAttribute: string;
  *    }
  *
  * Update the object 'elementAttributes' below, to register the attributes the Web Component
  * is expected to take.
  * Example:
  *    {
- *      title: this.getAttribute('title),
+ *      title: 'title',
+ *      customAttribute: 'custom-attribute'
  *    }
  */
 
-export interface IElementAttributes {}
+export interface IElementAttributes {
+
+}
+
+const elementAttributes: IElementAttributes = {
+  
+};
 
 class %component-name-pascal% extends HTMLElement {
-  private elementAttributes: IElementAttributes = {};
+  private elementAttributes(): IElementAttributes {
+    const attributes = {} as IElementAttributes;
+
+    Object.entries(elementAttributes).forEach(([key, value]: [string, string]) => {
+      attributes[key] = this.getAttribute(value);
+    });
+
+    return attributes;
+  }
+
+  public static get observedAttributes() {
+    return Object.values(elementAttributes);
+  }
 
   public connectedCallback() {
+    this.mountReactApp();
+  }
+
+  public attributeChangedCallback() {
+    this.mountReactApp();
+  }
+
+  public disconnectedCallback() {
+    ReactDOM.unmountComponentAtNode(this);
+  }
+
+  private mountReactApp() {
     ReactDOM.render(
       (
         <root.div>
           <EventProvider value={this.eventDispatcher}>
-            <App {...this.elementAttributes} />
+            <App {...this.elementAttributes()} />
           </EventProvider>
         </root.div>
       ),
       this,
     );
-  }
-
-  public disconnectedCallback() {
-    ReactDOM.unmountComponentAtNode(this);
   }
 
   private eventDispatcher = (event: Event) => {

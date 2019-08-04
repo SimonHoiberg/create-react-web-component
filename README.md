@@ -40,9 +40,9 @@ export interface IElementAttributes {
 Then update the object 'elementAttributes' to register the attributes the Web Component is expected to take.  
 Example:  
 ```TypeScript
-private elementAttributes: IElementAttributes = {
-  title: this.getAttribute('title'),
-  color: this.getAttribute('color'),
+const elementAttributes: IElementAttributes = {
+  title: 'title',
+  color: 'color',
 };
 ```
 
@@ -54,10 +54,10 @@ import * as React from 'react';
 import EventContext from './utils/EventContext';
 
 const App: React.FC = () => {
+  const dispatch = React.useContext(EventContext);
 
   const handleClick = () => {
     const event = new Event('my-event');
-    const dispatch = React.useContext(EventContext);
     dispatch(event);
   }
 
