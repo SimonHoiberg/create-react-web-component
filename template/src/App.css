@@ -1,0 +1,16 @@
+.app {
+  width: 750px;
+  height: 350px;
+  border-radius: 5px;
+  border: 1px solid #E6EEF0;
+  background-color: white;
+  box-shadow: 0 4px 9px 0 rgba(55, 92, 130, 0.11);
+}
+
+.header-title {
+  height: 50px;
+  line-height: 50px;
+  font-size: 28px;
+  color: #444;
+  text-align: center;
+}

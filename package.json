@@ -1,0 +1,60 @@
+{
+  "name": "create-react-web-component",
+  "version": "1.0.0",
+  "description": "Set up a React App wrapped in a Web Component",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "bin": {
+    "@silind/create-react-web-component": "bin/create-react-web-component",
+    "create-react-web-component": "bin/create-react-web-component"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Silind/create-react-web-component.git"
+  },
+  "keywords": [
+    "react",
+    "web-component",
+    "typescript"
+  ],
+  "author": "Silind Software",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Silind/create-react-web-component/issues"
+  },
+  "homepage": "https://github.com/Silind/create-react-web-component#readme",
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/node": "^12.0.12",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/**/*.test.(ts|tsx)"
+    ],
+    "collectCoverage": true
+  },
+  "dependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/mkdirp": "^0.5.2",
+    "@types/ncp": "^2.0.1",
+    "esm": "^3.2.25",
+    "inquirer": "^6.5.0",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0"
+  }
+}
