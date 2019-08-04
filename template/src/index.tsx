@@ -7,7 +7,7 @@ import App from './App';
 /**
  * The Web Component will be wrapping the React App, and will be defined as a Custom Element.
  *
- * Update the interface 'IElementAttributes' above, to match the attributes the Web Component
+ * Update the interface 'IElementAttributes' below, to match the attributes the Web Component
  * is expected to take.
  * Example:
  *    {

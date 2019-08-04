@@ -1,9 +1,8 @@
 {
   "rules": {
-    "no-eval": false,
     "max-line-length": { "options": [120], "severity": "warning" },
     "no-lowlevel-commenting": { "severity": "warning" },
-    "discreet-ternary": [true],
+    "discreet-ternary": { "severity": "warning" },
     "curly": { "severity": "warning" },
     "typedef": false
   },
