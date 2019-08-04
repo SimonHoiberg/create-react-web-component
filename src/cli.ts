@@ -22,6 +22,7 @@ export async function cli() {
 
     const projectDirectory = await copyTemplate(options.directory); 
     await writeComponentName(projectDirectory, names);
+    await writeProjectDescription(projectDirectory, options.description);
 
     console.log('');
     console.log('Your project is ready!');
@@ -70,6 +71,11 @@ async function promptForQuestions() {
   
         return 'Name must be camelCase, PascalCase or snake-case';
       }
+    },
+    {
+      type: 'input',
+      name: 'description',
+      message: 'Give your component a desription (optional)',
     }
   ];
 
@@ -111,8 +117,15 @@ async function writeComponentName(projectDirectory: string, names: INames) {
   await changeNameInfile(`${projectDirectory}/public/index.html`, new RegExp(/%component-name-snake%/g), names.snake);
   await changeNameInfile(`${projectDirectory}/package.json`, new RegExp(/%component-name-snake%/g), names.snake);
   await changeNameInfile(`${projectDirectory}/src/index.tsx`, new RegExp(/%component-name-snake%/g), names.snake);
+  await changeNameInfile(`${projectDirectory}/README.md`, new RegExp(/%component-name-title%/g), names.title);
+  await changeNameInfile(`${projectDirectory}/README.md`, new RegExp(/%component-name-snake%/g), names.snake);
   await changeNameInfile(`${projectDirectory}/src/index.tsx`, new RegExp(/%component-name-pascal%/g), names.pascal);
   await changeNameInfile(`${projectDirectory}/src/App.tsx`, new RegExp(/%component-name-title%/g), names.title);
+}
+
+async function writeProjectDescription(projectDirectory: string, description: string) {
+  await changeNameInfile(`${projectDirectory}/README.md`, new RegExp(/%component-description%/g), description);
+  await changeNameInfile(`${projectDirectory}/package.json`, new RegExp(/%component-description%/g), description);
 }
 
 async function changeNameInfile(file: string, changeWhere: RegExp ,changeTo: string) {

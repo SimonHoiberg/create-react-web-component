@@ -1,20 +1,26 @@
 {
   "name": "%component-name-snake%",
   "version": "1.0.0",
-  "description": "",
+  "description": "%component-description%",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./config/config.development.js",
-    "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config ./config/config.production.js",
+    "serve": "yarn run build && node node_modules/serve/bin/serve dist",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^24.0.16",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^3.1.0",
+    "file-loader": "^4.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "terser-webpack-plugin": "^1.4.1",
     "to-string-loader": "^1.1.5",
+    "ts-jest": "^24.0.2",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-silind": "^1.0.14",
     "tslint-react": "^4.0.0",
@@ -30,7 +36,20 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-shadow": "^17.1.2",
+    "serve": "^11.1.0",
     "style-it": "^2.1.4",
     "tslint": "^5.18.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/**/*.test.(ts|tsx)"
+    ]
   }
 }
