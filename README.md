@@ -26,25 +26,41 @@ Get started by running the command
 npx create-react-web-component
 ```
 
-#### Attributes
-To register attributes for the Web Component, go to `src/index.tsx`  
-Update the interface `IElementAttributes` to match the attributes the Web Component is expected to take.  
-Example:
+#### Properties and attributes
+To make sure that properties and attributes of the Web Component is passed down to the React App as props, we need to register the properties and attributes.
+
+To register properties and attributes for the Web Component, go to `src/componentProperties.ts`  
+
+To register for properties, update the interface `IComponentProperties` and object `componentProperties` to reflect the types and properties that the Web Component will receive:  
 ```TypeScript
-export interface IElementAttributes {
-  title: string;
-  color: string;
+export interface IComponentProperties {
+  todos: string[];
 }
-```
-  
-Then update the object 'elementAttributes' to register the attributes the Web Component is expected to take.  
-Example:  
-```TypeScript
-const elementAttributes: IElementAttributes = {
-  title: 'title',
-  color: 'color',
+
+export const componentProperties: IComponentProperties = {
+  todos: [
+    'Go to src/componentProperties.ts...',
+    'Register properties and attributes...',
+    'Build awesome React Web Component!',
+  ],
 };
 ```
+
+In the same way, use the interface `IComponentAttributes` and object `componentAttributes` to register attributes for the Web Component:  
+```TypeScript
+export interface IComponentAttributes {
+  componentTitle: string;
+}
+
+export const componentAttributes: IComponentAttributes = {
+  componentTitle: 'My React Web Component',
+};
+```
+*NB: The type of an attribute is always a string*  
+
+To understand the difference between properties and attributes,
+please refer to this article:  
+https://alligator.io/web-components/attributes-properties/
 
 #### Events
 In order to dispatch events that can be listened to from the Web Component, use the `EventContext`.  

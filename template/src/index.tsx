@@ -2,56 +2,45 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import root from 'react-shadow';
 import { EventProvider } from './utils/EventContext';
+import {
+  IComponentProperties,
+  IComponentAttributes,
+  componentProperties,
+  componentAttributes,
+} from './componentProperties';
 import App from './App';
 
 /**
- * The Web Component will be wrapping the React App, and will be defined as a Custom Element.
+ * Caution! You should not edit this file.
+ * To register component properties, open the file 'componentProperties.ts'
  *
- * Update the interface 'IElementAttributes' below, to match the attributes the Web Component
- * is expected to take.
- * Example:
- *    {
- *      title: string;
- *      customAttribute: string;
- *    }
- *
- * Update the object 'elementAttributes' below, to register the attributes the Web Component
- * is expected to take.
- * Example:
- *    {
- *      title: 'title',
- *      customAttribute: 'custom-attribute'
- *    }
+ * Editing this file might cause unintented behavior.
  */
 
-export interface IElementAttributes {
-
-}
-
-const elementAttributes: IElementAttributes = {
-  
-};
-
 class %component-name-pascal% extends HTMLElement {
-  private elementAttributes(): IElementAttributes {
-    const attributes = {} as IElementAttributes;
-
-    Object.entries(elementAttributes).forEach(([key, value]: [string, string]) => {
-      attributes[key] = this.getAttribute(value);
-    });
-
-    return attributes;
+  public static get observedAttributes() {
+    return Object.keys(componentAttributes);
   }
 
-  public static get observedAttributes() {
-    return Object.values(elementAttributes);
+  private reactProps(): IComponentAttributes & IComponentProperties {
+    const attributes = {} as IComponentAttributes;
+
+    Object.keys(componentAttributes).forEach((key: string) => {
+      attributes[key] = this.getAttribute(key) || componentAttributes[key];
+    });
+
+    return { ...attributes, ...properties };
   }
 
   public connectedCallback() {
     this.mountReactApp();
   }
 
-  public attributeChangedCallback() {
+  public attributechangedcallback(name: string, oldValue: string, newValue: string) {
+    this.mountReactApp();
+  }
+
+  public reactPropsChangedCallback(name: string, oldValue: any, newValue: any) {
     this.mountReactApp();
   }
 
@@ -64,7 +53,7 @@ class %component-name-pascal% extends HTMLElement {
       (
         <root.div>
           <EventProvider value={this.eventDispatcher}>
-            <App {...this.elementAttributes()} />
+            <App {...this.reactProps()} />
           </EventProvider>
         </root.div>
       ),
@@ -77,4 +66,25 @@ class %component-name-pascal% extends HTMLElement {
   }
 }
 
+const properties = { ...componentProperties } as IComponentProperties;
+const propertyMap = {} as PropertyDescriptorMap;
+
+Object.keys(componentProperties).forEach((key: string) => {
+  const property: PropertyDescriptor = {
+    configurable: true,
+    enumerable: true,
+    get() {
+      return properties[key];
+    },
+    set(newValue) {
+      const oldValue = properties[key];
+      properties[key] = newValue;
+      this.reactPropsChangedCallback(key, oldValue, newValue);
+    },
+  };
+
+  propertyMap[key] = property;
+});
+
+Object.defineProperties(%component-name-pascal%.prototype, propertyMap);
 customElements.define('%component-name-snake%', %component-name-pascal%);
