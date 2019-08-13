@@ -86,8 +86,8 @@ async function promptForQuestions() {
 
 async function copyTemplate(projectName: string) {
   const currentDirectory = process.cwd();
-  const templateDirectory = resolve(__dirname, '../template');
-  
+  const templateDirectory = fs.realpathSync(resolve(__dirname, '../template'));
+
   const projectDirectory: string = await new Promise((resolve, reject) => {
     const projectDir = `${currentDirectory}/${projectName}`;
     mkdirp(projectDir, (err) => {

@@ -25,6 +25,28 @@ Get started by running the command
 ```console
 npx create-react-web-component
 ```
+Or install the package globally
+
+- yarn
+  ```console
+  yarn global add create-react-web-component
+  ```
+
+- npm
+  ```console
+  npm i -g create-react-web-component
+  ```
+
+This will bootstrap a new project for you.  
+Now use the following commands:
+```console
+cd <project-folder>
+yarn install
+yarn start
+```
+Your project will start running on `localhost:3000` and your browser opens a new window  
+
+![example](https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component.png)
 
 #### Properties and attributes
 To make sure that properties and attributes of the Web Component is passed down to the React App as props, we need to register the properties and attributes.
