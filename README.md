@@ -11,6 +11,13 @@
 
 - [How it works](#how-it-works)
 - [**Getting Started**](#getting-started)
+  - [Install](#install)
+  - [Properties and attributes](##properties-and-attributes)
+  - [Events](#events)
+  - [Styles](#styles)
+- [Usage](#usage)
+  - [Build](#build)
+  - [Serve](#serve)
 - [Contributing](#contributing)
 - [License](#license)
 - [Get Help](#get-help)
@@ -20,7 +27,7 @@ Create React Web Component will boostrap a basic setup for creating a React App 
 
 ## Getting Started
 
-### Setup
+### Install
 Get started by running the command
 ```console
 npx create-react-web-component
@@ -46,9 +53,11 @@ yarn start
 ```
 Your project will start running on `localhost:3000` and your browser opens a new window  
 
-![example](https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component.png)
+<p align="center">
+<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component.png" />
+</p>
 
-#### Properties and attributes
+### Properties and attributes
 To make sure that properties and attributes of the Web Component is passed down to the React App as props, we need to register the properties and attributes.
 
 To register properties and attributes for the Web Component, go to `src/componentProperties.ts`  
@@ -84,7 +93,7 @@ To understand the difference between properties and attributes,
 please refer to this article:  
 https://alligator.io/web-components/attributes-properties/
 
-#### Events
+### Events
 In order to dispatch events that can be listened to from the Web Component, use the `EventContext`.  
 For example - if you want to dispatch a custom event 'my-event' that is triggered onClick, all you have to do is:  
 ```JSX
@@ -106,7 +115,7 @@ const App: React.FC = () => {
 };
 ```
 
-#### Styles
+### Styles
 In order to use styles in your components, use the `<Styled>` component, or the `withStyles()` HOC.  
 First import your css-file like this:
 ```TypeScript
@@ -151,6 +160,7 @@ export default withStyles(styles)(App);
 ```
 This will have the exactly same effect, so it's simply a matter of preference.
 
+## Usage
 ### Build
 Build you component by running the command
 ```console
