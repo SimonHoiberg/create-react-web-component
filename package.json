@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "bin": {
-    "@silind/create-react-web-component": "bin/create-react-web-component",
     "create-react-web-component": "bin/create-react-web-component"
   },
   "publishConfig": {
