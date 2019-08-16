@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { FC } from 'react';
+import ICustomProperties from '.';
 import Styled from './utils/Styled';
-import * as styles from './App.css';
-import { IComponentProperties, IComponentAttributes } from './componentProperties';
+import styles from './App.css';
 
-const App: React.FC<IComponentProperties & IComponentAttributes> = (props) => {
+const App: FC<ICustomProperties> = (props) => {
   const todos = props.todos.map((todo: string) => (
     <li key={todo} className='todo-title'>{todo}</li>
   ));

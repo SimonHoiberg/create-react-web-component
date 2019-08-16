@@ -22,7 +22,7 @@ class %component-name-pascal% extends HTMLElement {
     return Object.keys(componentAttributes);
   }
 
-  private reactProps(): IComponentAttributes & IComponentProperties {
+  private reactProps(): ICustomProperties {
     const attributes = {} as IComponentAttributes;
 
     Object.keys(componentAttributes).forEach((key: string) => {
@@ -36,11 +36,19 @@ class %component-name-pascal% extends HTMLElement {
     this.mountReactApp();
   }
 
-  public attributechangedcallback(name: string, oldValue: string, newValue: string) {
+  public attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (oldValue === newValue) {
+      return;
+    }
+
     this.mountReactApp();
   }
 
   public reactPropsChangedCallback(name: string, oldValue: any, newValue: any) {
+    if (oldValue === newValue) {
+      return;
+    }
+
     this.mountReactApp();
   }
 
@@ -88,3 +96,5 @@ Object.keys(componentProperties).forEach((key: string) => {
 
 Object.defineProperties(%component-name-pascal%.prototype, propertyMap);
 customElements.define('%component-name-snake%', %component-name-pascal%);
+
+export default interface ICustomProperties extends IComponentAttributes, IComponentProperties {}

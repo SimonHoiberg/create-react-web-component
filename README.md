@@ -12,7 +12,7 @@
 - [How it works](#how-it-works)
 - [**Getting Started**](#getting-started)
   - [Install](#install)
-  - [Properties and attributes](##properties-and-attributes)
+  - [Properties and attributes](#properties-and-attributes)
   - [Events](#events)
   - [Styles](#styles)
 - [Usage](#usage)
@@ -97,11 +97,11 @@ https://alligator.io/web-components/attributes-properties/
 In order to dispatch events that can be listened to from the Web Component, use the `EventContext`.  
 For example - if you want to dispatch a custom event 'my-event' that is triggered onClick, all you have to do is:  
 ```JSX
-import * as React from 'react';
+import React, { FC, useContext } from 'react';
 import EventContext from './utils/EventContext';
 
-const App: React.FC = () => {
-  const dispatch = React.useContext(EventContext);
+const App: FC = () => {
+  const dispatch = useContext(EventContext);
 
   const handleClick = () => {
     const event = new Event('my-event');
@@ -119,16 +119,16 @@ const App: React.FC = () => {
 In order to use styles in your components, use the `<Styled>` component, or the `withStyles()` HOC.  
 First import your css-file like this:
 ```TypeScript
-import * as styles from './App.css';
+import styles from './App.css';
 ```
 
 Then wrap the component in the `<Styled>` component, and pass down the imported style as props:  
 ```JSX
-import * as React from 'react';
+import React, { FC } from 'react';
 import Styled from './utils/Styled';
-import * as styles from './App.css';
+import styles from './App.css';
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <Styled styles={styles}>
       <div className='app'>
@@ -144,18 +144,6 @@ Any children of the `<Styled>` component can now reference the styles.
   
 Alternatively, use the `withStyles()` HOC:  
 ```JSX
-import * as React from 'react';
-import { withStyles } from './utils/Styled';
-import * as styles from './App.css';
-
-const App: React.FC = () => {
-  return (
-    <div className='app'>
-      <div className='header-title'>My React Web Component</div>
-    </div>
-  );
-};
-
 export default withStyles(styles)(App);
 ```
 This will have the exactly same effect, so it's simply a matter of preference.
@@ -171,7 +159,7 @@ or
 npm run build
 ```
 
-This will create a dist-folder containing a `main.js` file.  
+This will create a dist-folder containing a file with the name of your project, e.g. `MyReactWebComponent.js`.  
 In order to use your Web Component, simply import this file in a project, and use your Web Component as:
 ```html
 <my-react-web-component 
@@ -182,7 +170,7 @@ In order to use your Web Component, simply import this file in a project, and us
 ```
 
 ### Serve
-For development, you can serve the `main.js` file using the command:
+For development, you can serve the `MyReactWebComponent.js` file using the command:
 ```console
 yarn run serve
 ```
@@ -190,7 +178,7 @@ or
 ```console
 npm run serve
 ```
-This will serve your file on `http://localhost:5000/main.js`
+This will serve your file on `http://localhost:5000/MyReactWebComponent.js`
 
 ## Contributing
 

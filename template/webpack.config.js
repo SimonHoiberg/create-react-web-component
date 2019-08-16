@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     path: resolve(__dirname, './dist'),
-    filename: 'main.js',
+    filename: '%component-name-pascal%.js',
   },
   module: {
     rules: [
