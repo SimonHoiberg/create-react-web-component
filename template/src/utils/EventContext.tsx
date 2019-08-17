@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { createContext } from 'react';
 
-const EventContext = React.createContext<Function>(() => {});
+const EventContext = createContext<Function>(() => {});
 export const EventProvider = EventContext.Provider;
 export const EventConsumer = EventContext.Consumer;
 export default EventContext;

@@ -1,12 +1,15 @@
 .app {
   width: 750px;
   height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 5px;
   border: 1px solid #E6EEF0;
   padding: 20px;
   box-sizing: border-box;
   background-color: white;
-  box-shadow: 0 4px 9px 0 rgba(55, 92, 130, 0.11);
+  box-shadow: 0 4px 9px 0 #375c821c;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -37,4 +40,23 @@
   line-height: 25px;
   font-size: 18px;
   color: #614444;
+}
+
+.button {
+  width: 150px;
+  height: 45px;
+  border-radius: 5px;
+  background-color: #223a7c;
+  color: white;
+  box-shadow: 2px 2px 5px #16314d98;
+  margin-top: 25px;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  box-shadow: 4px 4px 8px #16314d63;
+  background-color: #40558f;
 }

@@ -1,11 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import ICustomProperties from '.';
 import Styled from './utils/Styled';
 import styles from './App.css';
+import EventContext from './utils/EventContext';
 
 const App: FC<ICustomProperties> = (props) => {
-  const todos = props.todos.map((todo: string) => (
-    <li key={todo} className='todo-title'>{todo}</li>
+  const dispatch = useContext(EventContext);
+
+  const handleClick = () => {
+    const event = new Event('my-event');
+    dispatch(event);
+  };
+
+  const renderTodos = props.todos.map((todo: string) => (
+    <li key={todo} className='todo-title'>
+      {todo}
+    </li>
   ));
 
   return (
@@ -14,10 +24,11 @@ const App: FC<ICustomProperties> = (props) => {
         <div className='header-title'>{props.componentTitle}</div>
         <div className='sub-title'>To get started:</div>
         <div className='todo-list'>
-          <ul>
-            {todos}
-          </ul>
+          <ul>{renderTodos}</ul>
         </div>
+        <button className='button' onClick={handleClick}>
+          Let's go!
+        </button>
       </div>
     </Styled>
   );

@@ -5,7 +5,7 @@
 ![Code Coverage](https://img.shields.io/codecov/c/github/Silind/create-react-web-component)
 
 #### Set up a React App wrapped in a Web Component
-> This setup will be using TypeScript
+> This setup is configured using TypeScript and is based on [*react-scripts*](https://www.npmjs.com/package/react-scripts) from [*create-react-app*](https://create-react-app.dev/docs/getting-started)
 
 ## Table of content
 
