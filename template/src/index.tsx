@@ -22,6 +22,8 @@ import App from './App';
  */
 
 class %component-name-pascal% extends HTMLElement {
+  private mountPoint: HTMLDivElement | null = null;
+
   public static get observedAttributes() {
     return Object.keys(componentAttributes);
   }
@@ -61,8 +63,11 @@ class %component-name-pascal% extends HTMLElement {
   }
 
   private mountReactApp() {
-    const mountPoint = document.createElement('div');
-    this.attachShadow({ mode: 'open' }).appendChild(mountPoint);
+    if (!this.mountPoint) {
+      this.mountPoint = document.createElement('div');
+      this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
+      retargetEvents(this);
+    }
 
     ReactDOM.render(
       (
@@ -70,10 +75,8 @@ class %component-name-pascal% extends HTMLElement {
           <App {...this.reactProps()} />
         </EventProvider>
       ),
-      mountPoint,
+      this.mountPoint,
     );
-
-    retargetEvents(this);
   }
 
   private eventDispatcher = (event: Event) => {
