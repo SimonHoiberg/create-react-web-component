@@ -1,6 +1,6 @@
 {
   "name": "create-react-web-component",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Set up a React App wrapped in a Web Component",
   "main": "dist/index.js",
   "scripts": {
