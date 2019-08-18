@@ -7,6 +7,10 @@
 #### Set up a React App wrapped in a Web Component
 > This setup is configured using TypeScript and is based on [*react-scripts*](https://www.npmjs.com/package/react-scripts) from [*create-react-app*](https://create-react-app.dev/docs/getting-started)
 
+<p align="center">
+<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component-demo.gif" />
+</p>
+
 ## Table of content
 
 - [How it works](#how-it-works)
