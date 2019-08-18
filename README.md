@@ -11,13 +11,7 @@
 
 - [How it works](#how-it-works)
 - [**Getting Started**](#getting-started)
-  - [Install](#install)
-  - [Properties and attributes](#properties-and-attributes)
-  - [Events](#events)
-  - [Styles](#styles)
 - [Usage](#usage)
-  - [Build](#build)
-  - [Serve](#serve)
 - [Contributing](#contributing)
 - [License](#license)
 - [Get Help](#get-help)
@@ -54,7 +48,7 @@ yarn start
 Your project will start running on `localhost:3000` and your browser opens a new window  
 
 <p align="center">
-<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component.png" />
+<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component-updated.png" />
 </p>
 
 ### Properties and attributes
