@@ -1,3 +1,9 @@
+/**
+ * Caution! You should not edit this file.
+ *
+ * Running 'create-react-web-component --update' will replace this file.
+ */
+
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 

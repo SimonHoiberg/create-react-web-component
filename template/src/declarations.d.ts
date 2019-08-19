@@ -1,3 +1,10 @@
+/**
+ * Caution! You should not edit this file.
+ * To add additional declarations, create a new file: '.d.ts'
+ *
+ * Running 'create-react-web-component --update' will replace this file.
+ */
+
 /// <reference types="node" />
 /// <reference types="react" />
 /// <reference types="react-dom" />

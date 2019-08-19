@@ -1,3 +1,9 @@
+/**
+ * Caution! You should not edit this file.
+ *
+ * Running 'create-react-web-component --update' will replace this file.
+ */
+
 import React, { FC, Component, ReactNode, ComponentClass, CSSProperties } from 'react';
 import Style from 'style-it';
 

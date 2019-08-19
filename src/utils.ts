@@ -1,3 +1,11 @@
+import fs from 'fs';
+
+export interface INames {
+  title: string;
+  pascal: string;
+  snake: string;
+}
+
 export function toTitleFormat(name: string) {
   if (name.includes('-')) { 
     const wordList = name.split('-');
@@ -25,4 +33,28 @@ export function toPascalCase(name: string) {
   });
 
   return capitalized.join('');
+}
+
+export async function changeNameInfile(file: string, changeWhere: RegExp, changeTo: string) {
+  const changedFile = await new Promise((resolve, reject) => {
+    fs.readFile(file, 'utf-8', (err, data) => {
+      if (err) {
+        reject('Could not read file');
+      }
+
+      const changed = data.replace(changeWhere, changeTo);
+
+      resolve(changed);
+    });
+  });
+
+  await new Promise((resolve, reject) => {
+    fs.writeFile(file, changedFile, 'utf-8', err => {
+      if (err) {
+        reject('Could not write file');
+      }
+
+      resolve();
+    });
+  });
 }

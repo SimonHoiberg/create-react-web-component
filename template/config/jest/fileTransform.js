@@ -1,3 +1,9 @@
+/**
+ * Caution! You should not edit this file.
+ *
+ * Running 'create-react-web-component --update' will replace this file.
+ */
+
 'use strict';
 
 const path = require('path');

@@ -1,3 +1,9 @@
+/**
+ * Caution! You should not edit this file.
+ *
+ * Running 'create-react-web-component --update' will replace this file.
+ */
+
 const fs = require('fs');
 const isWsl = require('is-wsl');
 const path = require('path');

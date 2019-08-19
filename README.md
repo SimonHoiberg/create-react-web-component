@@ -8,7 +8,7 @@
 > This setup is configured using TypeScript and is based on [*react-scripts*](https://www.npmjs.com/package/react-scripts) from [*create-react-app*](https://create-react-app.dev/docs/getting-started)
 
 <p align="center">
-<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component-demo.gif" />
+<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component-demo-updated.gif" />
 </p>
 
 ## Table of content
@@ -16,6 +16,7 @@
 - [How it works](#how-it-works)
 - [**Getting Started**](#getting-started)
 - [Usage](#usage)
+- [Update](#update)
 - [Contributing](#contributing)
 - [License](#license)
 - [Get Help](#get-help)
@@ -177,6 +178,19 @@ or
 npm run serve
 ```
 This will serve your file on `http://localhost:5000/MyReactWebComponent.js`
+
+## Update
+To update your project to the latest version of create-react-web-component, use the command:  
+```console
+npx create-react-web-component --update
+```
+This will update all configuration files to the newest version
+  - config/*
+  - scripts/*
+  - src/utils/EventContext.tsx
+  - src/utils/Styled.tsx
+  - src/declarations.d.ts
+  - src/index.tsx
 
 ## Contributing
 
