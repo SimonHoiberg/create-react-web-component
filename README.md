@@ -1,4 +1,4 @@
-# Create React Web Component
+# Create React Web Component [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build%20Web%20Components%20using%20React&url=https://github.com/Silind/tslint-config-silind&hashtags=react,webcomponent,frontend)
 ![NPM Version](https://img.shields.io/npm/v/create-react-web-component.svg)
 [![Github License](https://img.shields.io/github/license/Silind/create-react-web-component)](https://github.com/Silind/create-react-web-component/blob/master/LICENSE)
 [![Build Status](https://api.travis-ci.com/Silind/create-react-web-component.svg?branch=master)](https://travis-ci.com/Silind/create-react-web-component)

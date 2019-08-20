@@ -1,4 +1,4 @@
-/**
+/*!
  * Caution! You should not edit this file.
  *
  * Running 'create-react-web-component --update' will replace this file.
@@ -13,7 +13,7 @@ interface IStyled {
 }
 
 const Styled: FC<IStyled> = (props): JSX.Element => {
-  return Style.it(props.styles.toString(), <div>{props.children}</div>);
+  return Style.it(props.styles.toString(), props.children);
 };
 
 const withStyles = (styles: CSSProperties) => <P, S>(WrappedComponent: ComponentClass<P, S> | FC<P>) => {

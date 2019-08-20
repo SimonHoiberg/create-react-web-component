@@ -1,4 +1,4 @@
-/**
+/*!
  * Caution! You should not edit this file.
  * To add additional declarations, create a new file: '.d.ts'
  *
@@ -82,7 +82,7 @@ declare module '*.svg' {
 
 declare module 'style-it' {
   const Style: {
-    it: (s: string, e: JSX.Element) => JSX.Element,
+    it: (s: string, e: JSX.Element | React.ReactNode) => JSX.Element,
   };
   export default Style;
 }

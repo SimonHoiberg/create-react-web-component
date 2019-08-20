@@ -1,4 +1,4 @@
-/**
+/*!
  * Caution! You should not edit this file.
  *
  * Running 'create-react-web-component --update' will replace this file.

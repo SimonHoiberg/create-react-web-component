@@ -1,6 +1,14 @@
+/*!
+ * Caution! You should not edit this file.
+ * To register properties and attributes, open the file 'componentProperties.ts'
+ *
+ * Running 'create-react-web-component --update' will replace this file.
+ */
+
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import '@webcomponents/webcomponentsjs/webcomponents-bundle.js';
+import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -13,13 +21,6 @@ import {
   componentAttributes,
 } from './componentProperties';
 import App from './App';
-
-/**
- * Caution! You should not edit this file.
- * To register properties and attributes, open the file 'componentProperties.ts'
- *
- * Running 'create-react-web-component --update' will replace this file.
- */
 
 class %component-name-pascal% extends HTMLElement {
   private mountPoint: HTMLDivElement | null = null;
