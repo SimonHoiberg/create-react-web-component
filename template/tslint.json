@@ -4,6 +4,7 @@
     "no-lowlevel-commenting": { "severity": "warning" },
     "discreet-ternary": { "severity": "warning" },
     "curly": { "severity": "warning" },
+    "jsx-wrap-multiline": false,
     "typedef": false
   },
   "linterOptions": {

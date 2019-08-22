@@ -60,7 +60,9 @@ class %component-name-pascal% extends HTMLElement {
   }
 
   public disconnectedCallback() {
-    ReactDOM.unmountComponentAtNode(this);
+    if (this.mountPoint) {
+      ReactDOM.unmountComponentAtNode(this.mountPoint);
+    }
   }
 
   private mountReactApp() {
