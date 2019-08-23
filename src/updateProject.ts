@@ -9,10 +9,14 @@ import { changeNameInfile, toPascalCase } from './utils';
 
 export default function updateProject() {
   if (!checkValidProjectFolder()) {
-    console.log('');
-    console.log(chalk.red("The current directory doesn't seem to be a valid project directory"));
-    console.log(chalk.red('Please cd into a valid project directory in order to update'));
-    console.log('');
+    const message = `
+    
+      The current directory doesn't seem to be a valid project directory.
+      Please cd into a valid project directory in order to update
+
+    `;
+
+    console.log(chalk.red(message));
     return;
   }
 
@@ -29,6 +33,7 @@ async function promptForUpdateConfirmation() {
     - src/utils/Styled.tsx
     - src/declarations.d.ts
     - src/index.tsx
+    - tsconfig.json
 
     Changes in these files will be forever lost.
     Are you absolutely sure that you want to update?
@@ -85,6 +90,7 @@ function removeOutdatedFiles() {
   fs.unlinkSync(`${currentDirectory}/src/utils/EventContext.tsx`);
   fs.unlinkSync(`${currentDirectory}/src/utils/Styled.tsx`);
   fs.unlinkSync(`${currentDirectory}/src/index.tsx`);
+  fs.unlinkSync(`${currentDirectory}/tsconfig.json`);
 }
 
 async function copyNewFiles() {
@@ -100,6 +106,7 @@ async function copyNewFiles() {
   await copyNewFile(`${templateDirectory}/src/utils/Styled.tsx`, `${currentDirectory}/src/utils/Styled.tsx`);
   await copyNewFile(`${templateDirectory}/src/declarations.d.ts`, `${currentDirectory}/src/declarations.d.ts`);
   await copyNewFile(`${templateDirectory}/src/index.tsx`, `${currentDirectory}/src/index.tsx`);
+  await copyNewFile(`${templateDirectory}/tsconfig.json`, `${currentDirectory}/tsconfig.json`);
 }
 
 async function copyNewFile(filePath: string, copyPath: string) {
@@ -118,17 +125,16 @@ async function mergeFiles() {
   const currentDirectory = process.cwd();
   const templateDirectory = fs.realpathSync(resolve(__dirname, '../template'));
 
-  const currentTsConfig = require(`${currentDirectory}/tsconfig.json`);
-  const newTsConfig = require(`${templateDirectory}/tsconfig.json`);
-  const updatedTsConfig = merge(currentTsConfig, newTsConfig);
-  fs.writeFileSync(`${currentDirectory}/tsconfig.json`, JSON.stringify(updatedTsConfig, null, 2));
-
   const currentPackageJson = require(`${currentDirectory}/package.json`);
   const newPackageJson = require(`${templateDirectory}/package.json`);
-  delete newPackageJson.name;
-  delete newPackageJson.description;
-  const updatedPackageJson = merge(currentPackageJson, newPackageJson);
-  fs.writeFileSync(`${currentDirectory}/package.json`, JSON.stringify(updatedPackageJson, null, 2));
+  
+  const currentDependencies = currentPackageJson.dependencies;
+  const newDependencies = newPackageJson.dependencies;
+
+  const mergedDependencies = merge(currentDependencies, newDependencies);
+  currentPackageJson.dependencies = mergedDependencies;
+
+  fs.writeFileSync(`${currentDirectory}/package.json`, JSON.stringify(currentPackageJson, null, 2));
 }
 
 async function writeComponentName() {
