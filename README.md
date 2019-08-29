@@ -5,10 +5,11 @@
 ![Code Coverage](https://img.shields.io/codecov/c/github/Silind/create-react-web-component)
 
 #### Set up a React App wrapped in a Web Component
-> This setup is configured using TypeScript and is based on [*react-scripts*](https://www.npmjs.com/package/react-scripts) from [*create-react-app*](https://create-react-app.dev/docs/getting-started)
+> This setup is configured using TypeScript and is based on [*react-scripts*](https://www.npmjs.com/package/react-scripts) from [*create-react-app*](https://create-react-app.dev/docs/getting-started)  
+> A thorough description of the principles used in this setup, can be read [in this article](https://itnext.io/react-and-web-components-3e0fca98a593)
 
 <p align="center">
-<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component-demo-updated.gif" />
+<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/create-react-web-component-demo/create-react-web-component-demo.gif" />
 </p>
 
 ## Table of content
@@ -53,7 +54,7 @@ yarn start
 Your project will start running on `localhost:3000` and your browser opens a new window  
 
 <p align="center">
-<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/icons-and-misc/create-react-web-component-updated.png" />
+<img src="https://silind-s3.s3.eu-west-2.amazonaws.com/create-react-web-component-demo/create-react-web-component.png" />
 </p>
 
 ### Properties and attributes
@@ -83,7 +84,7 @@ export interface IComponentAttributes {
 }
 
 export const componentAttributes: IComponentAttributes = {
-  componentTitle: 'My React Web Component',
+  componentTitle: 'Awesome Component',
 };
 ```
 *NB: The type of an attribute is always a string*  
@@ -158,18 +159,15 @@ or
 npm run build
 ```
 
-This will create a dist-folder containing a file with the name of your project, e.g. `MyReactWebComponent.js`.  
+This will create a dist-folder containing a file with the name of your project, e.g. `AwesomeComponent.js`.  
 In order to use your Web Component, simply import this file in a project, and use your Web Component as:
 ```html
-<my-react-web-component 
-  title="Cool Component" 
-  color="red"
->
-</my-react-web-component>
+<awesome-component componentTitle="Awesome Component">
+</awesome-component>
 ```
 
 ### Serve
-For development, you can serve the `MyReactWebComponent.js` file using the command:
+For development, you can serve the `AwesomeComponent.js` file using the command:
 ```console
 yarn run serve
 ```
@@ -177,7 +175,7 @@ or
 ```console
 npm run serve
 ```
-This will serve your file on `http://localhost:5000/MyReactWebComponent.js`
+This will serve your file on `http://localhost:5000/AwesomeComponent.js`
 
 ## Update
 To update your project to the latest version of create-react-web-component, use the command:  

@@ -1,5 +1,6 @@
 import createProject from './createProject';
 import updateProject from './updateProject';
+import { checkArg } from './utils';
 
 export async function cli(args: string[]) {
   try {
@@ -17,22 +18,3 @@ export async function cli(args: string[]) {
   }
 }
 
-function checkArg(arg: string): boolean {
-  if (arg === '--update') {
-    return true;
-  }
-
-  if (arg === '-update') {
-    return true;
-  }
-
-  if (arg === '--u') {
-    return true;
-  }
-
-  if (arg === '-u') {
-    return true;
-  }
-
-  return false;
-}
