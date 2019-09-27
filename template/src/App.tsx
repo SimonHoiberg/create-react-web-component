@@ -1,10 +1,12 @@
 import React, { FC, useContext } from 'react';
-import ICustomProperties from '.';
+import { IComponentProperties, IComponentAttributes } from './componentProperties';
+import EventContext from './utils/EventContext';
 import Styled from './utils/Styled';
 import styles from './App.css';
-import EventContext from './utils/EventContext';
 
-const App: FC<ICustomProperties> = (props) => {
+interface IProps extends IComponentProperties, IComponentAttributes {}
+
+const App: FC<IProps> = (props) => {
   const dispatch = useContext(EventContext);
 
   const handleClick = () => {

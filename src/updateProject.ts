@@ -27,8 +27,7 @@ async function promptForUpdateConfirmation() {
   const message = `
     Following files will be updated:
 
-    - config/*
-    - scripts/*
+    - config/config-overrides.js
     - src/utils/EventContext.tsx
     - src/utils/Styled.tsx
     - src/declarations.d.ts
@@ -52,14 +51,17 @@ async function promptForUpdateConfirmation() {
 function checkValidProjectFolder() {
   const currentDirectory = process.cwd();
 
-  const srcExists = fs.existsSync(`${currentDirectory}/src`);
-  const configExists = fs.existsSync(`${currentDirectory}/config`);
-  const scriptsExists = fs.existsSync(`${currentDirectory}/scripts`);
-  const utilsExists = fs.existsSync(`${currentDirectory}/src/utils`);
-  const packageExists = fs.existsSync(`${currentDirectory}/package.json`);
-  const tsconfigExists = fs.existsSync(`${currentDirectory}/tsconfig.json`);
+  const validFiles = [
+    fs.existsSync(`${currentDirectory}/config/config-overrides.js`),
+    fs.existsSync(`${currentDirectory}/src/utils/EventContext.tsx`),
+    fs.existsSync(`${currentDirectory}/src/utils/Styled.tsx`),
+    fs.existsSync(`${currentDirectory}/src/declarations.d.ts`),
+    fs.existsSync(`${currentDirectory}/src/index.tsx`),
+    fs.existsSync(`${currentDirectory}/package.json`),
+    fs.existsSync(`${currentDirectory}/tsconfig.json`),
+  ];
 
-  return srcExists && configExists && scriptsExists && utilsExists && packageExists && tsconfigExists;
+  return validFiles.every(file => file);
 }
 
 async function updateTemplateFiles() {
@@ -85,8 +87,7 @@ async function updateTemplateFiles() {
 
 function removeOutdatedFiles() {
   const currentDirectory = process.cwd();
-  rimraf.sync(`${currentDirectory}/config`);
-  rimraf.sync(`${currentDirectory}/scripts`);
+  fs.unlinkSync(`${currentDirectory}/config/config-overrides.js`);
   fs.unlinkSync(`${currentDirectory}/src/utils/EventContext.tsx`);
   fs.unlinkSync(`${currentDirectory}/src/utils/Styled.tsx`);
   fs.unlinkSync(`${currentDirectory}/src/index.tsx`);
@@ -97,8 +98,10 @@ async function copyNewFiles() {
   const currentDirectory = process.cwd();
   const templateDirectory = fs.realpathSync(resolve(__dirname, '../template'));
 
-  await copyNewFile(`${templateDirectory}/config`, `${currentDirectory}/config`);
-  await copyNewFile(`${templateDirectory}/scripts`, `${currentDirectory}/scripts`);
+  await copyNewFile(
+    `${templateDirectory}/config/config-overrides.js`,
+    `${currentDirectory}/config/config-overrides.js`,
+  );
   await copyNewFile(
     `${templateDirectory}/src/utils/EventContext.tsx`,
     `${currentDirectory}/src/utils/EventContext.tsx`,
@@ -111,7 +114,7 @@ async function copyNewFiles() {
 
 async function copyNewFile(filePath: string, copyPath: string) {
   await new Promise((resolve, reject) => {
-    ncp.ncp(filePath, copyPath, err => {
+    ncp.ncp(filePath, copyPath, (err) => {
       if (err) {
         reject('Could not copy file: ' + filePath);
       }
@@ -127,12 +130,18 @@ async function mergeFiles() {
 
   const currentPackageJson = require(`${currentDirectory}/package.json`);
   const newPackageJson = require(`${templateDirectory}/package.json`);
-  
+
   const currentDependencies = currentPackageJson.dependencies;
   const newDependencies = newPackageJson.dependencies;
 
   const mergedDependencies = merge(currentDependencies, newDependencies);
   currentPackageJson.dependencies = mergedDependencies;
+
+  const currentScripts = currentPackageJson.scripts;
+  const newScripts = newPackageJson.scripts;
+
+  const mergedScripts = merge(currentScripts, newScripts);
+  currentPackageJson.scripts = mergedScripts;
 
   fs.writeFileSync(`${currentDirectory}/package.json`, JSON.stringify(currentPackageJson, null, 2));
 }
@@ -146,8 +155,8 @@ async function writeComponentName() {
   await changeNameInfile(`${currentDirectory}/src/index.tsx`, new RegExp(/%component-name-snake%/g), snakeCaseName);
   await changeNameInfile(`${currentDirectory}/src/index.tsx`, new RegExp(/%component-name-pascal%/g), pascalName);
   await changeNameInfile(
-    `${currentDirectory}/config/webpack.config.js`,
+    `${currentDirectory}/config/config-overrides.js`,
     new RegExp(/%component-name-pascal%/g),
     pascalName,
   );
-} 
+}

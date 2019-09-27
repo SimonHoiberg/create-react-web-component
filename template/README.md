@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React Web Component](https://github.com/Silind/create-react-web-component).
+This project was bootstrapped with [Create React Web Component](https://github.com/Silind-Software/create-react-web-component).
 
 # %component-name-title%
 > %component-description%

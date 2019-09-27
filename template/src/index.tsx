@@ -1,18 +1,15 @@
 /*!
  * Caution! You should not edit this file.
- * To register properties and attributes, open the file 'componentProperties.ts'
  *
  * Running 'create-react-web-component --update' will replace this file.
  */
 
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
 import '@webcomponents/webcomponentsjs/webcomponents-bundle.js';
 import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import retargetEvents from 'react-shadow-dom-retarget-events';
+import root from 'react-shadow';
 import { EventProvider } from './utils/EventContext';
 import {
   IComponentProperties,
@@ -23,8 +20,6 @@ import {
 import App from './App';
 
 class %component-name-pascal% extends HTMLElement {
-  private mountPoint: HTMLDivElement | null = null;
-
   public static get observedAttributes() {
     return Object.keys(componentAttributes);
   }
@@ -60,31 +55,23 @@ class %component-name-pascal% extends HTMLElement {
   }
 
   public disconnectedCallback() {
-    if (this.mountPoint) {
-      ReactDOM.unmountComponentAtNode(this.mountPoint);
-    }
+    ReactDOM.unmountComponentAtNode(this);
   }
 
   private mountReactApp() {
-    if (!this.mountPoint) {
-      this.mountPoint = document.createElement('div');
-      this.attachShadow({ mode: 'open' }).appendChild(this.mountPoint);
-      retargetEvents(this);
-    }
-
     ReactDOM.render(
-      (
+      <root.div>
         <EventProvider value={this.eventDispatcher}>
           <App {...this.reactProps()} />
         </EventProvider>
-      ),
-      this.mountPoint,
+      </root.div>,
+      this,
     );
   }
 
   private eventDispatcher = (event: Event) => {
     this.dispatchEvent(event);
-  }
+  };
 }
 
 const properties = { ...componentProperties } as IComponentProperties;

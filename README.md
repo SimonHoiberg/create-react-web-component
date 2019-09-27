@@ -1,8 +1,8 @@
 # Create React Web Component [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build%20Web%20Components%20using%20React&url=https://github.com/Silind/tslint-config-silind&hashtags=react,webcomponent,frontend)
 ![NPM Version](https://img.shields.io/npm/v/create-react-web-component.svg)
-[![Github License](https://img.shields.io/github/license/Silind/create-react-web-component)](https://github.com/Silind/create-react-web-component/blob/master/LICENSE)
-[![Build Status](https://api.travis-ci.com/Silind/create-react-web-component.svg?branch=master)](https://travis-ci.com/Silind/create-react-web-component)
-![Code Coverage](https://img.shields.io/codecov/c/github/Silind/create-react-web-component)
+[![Github License](https://img.shields.io/github/license/Silind/create-react-web-component)](https://github.com/Silind-Software/create-react-web-component/blob/master/LICENSE)
+[![Build Status](https://api.travis-ci.com/Silind/create-react-web-component.svg?branch=master)](https://travis-ci.com/Silind-Software/create-react-web-component)
+![Code Coverage](https://img.shields.io/codecov/c/github/Silind-Software/create-react-web-component)
 
 #### Set up a React App wrapped in a Web Component
 > This setup is configured using TypeScript and is based on [*react-scripts*](https://www.npmjs.com/package/react-scripts) from [*create-react-app*](https://create-react-app.dev/docs/getting-started)  
@@ -63,7 +63,7 @@ To make sure that properties and attributes of the Web Component is passed down 
 To register properties and attributes for the Web Component, go to `src/componentProperties.ts`  
 
 To register for properties, update the interface `IComponentProperties` and object `componentProperties` to reflect the types and properties that the Web Component will receive:  
-```TypeScript
+```typescript
 export interface IComponentProperties {
   todos: string[];
 }
@@ -78,7 +78,7 @@ export const componentProperties: IComponentProperties = {
 ```
 
 In the same way, use the interface `IComponentAttributes` and object `componentAttributes` to register attributes for the Web Component:  
-```TypeScript
+```typescript
 export interface IComponentAttributes {
   componentTitle: string;
 }
@@ -96,7 +96,7 @@ https://alligator.io/web-components/attributes-properties/
 ### Events
 In order to dispatch events that can be listened to from the Web Component, use the `EventContext`.  
 For example - if you want to dispatch a custom event 'my-event' that is triggered onClick, all you have to do is:  
-```JSX
+```jsx
 import React, { FC, useContext } from 'react';
 import EventContext from './utils/EventContext';
 
@@ -118,12 +118,17 @@ const App: FC = () => {
 ### Styles
 In order to use styles in your components, use the `<Styled>` component, or the `withStyles()` HOC.  
 First import your css-file like this:
-```TypeScript
+```typescript
 import styles from './App.css';
 ```
 
-Then wrap the component in the `<Styled>` component, and pass down the imported style as props:  
-```JSX
+There are two cases in how to style a component: 
+  
+- A component where top-level is an html element, e.g. a `<div>` or a `<span>` etc.
+- A component where top-level is another React Component, a fragment, a function call that returns a component, etc.
+
+**In the first case**, we wrap the component in the `<Styled>` component, and pass down the imported style as props:  
+```jsx
 import React, { FC } from 'react';
 import Styled from './utils/Styled';
 import styles from './App.css';
@@ -141,25 +146,43 @@ const App: FC = () => {
 export default App;
 ```
 Any children of the `<Styled>` component can now reference the styles.
-  
-Alternatively, use the `withStyles()` HOC:  
-```JSX
+
+**In the second case**, we use the the `withStyles()` HOC.
+
+```jsx
+import React, { FC } from 'react';
+import { withStyles } from './utils/Styled';
+import styles from './App.css';
+
+const App: FC = () => {
+  return (
+    <>
+      <CoolReactComponent />
+      <AwesomeReactComponent />
+    </>
+  );
+};
+
 export default withStyles(styles)(App);
 ```
-This will have the exactly same effect, so it's simply a matter of preference.
+
+The main difference between the `<Styled>` component and the `withStyles()` HOC, is that the `<Styled>` component will inject all styles just below the html element that it wraps.  
+  
+The `withStyles()` will add an extra `<div>` element around the content that it wraps, and inject all styles into this.
+
 
 ## Usage
 ### Build
 Build you component by running the command
 ```console
-yarn run build
+yarn build
 ```
 or 
 ```console
 npm run build
 ```
 
-This will create a dist-folder containing a file with the name of your project, e.g. `AwesomeComponent.js`.  
+This will create a `/build` folder containing a file with the name of your component, e.g. `AwesomeComponent.js`.  
 In order to use your Web Component, simply import this file in a project, and use your Web Component as:
 ```html
 <awesome-component componentTitle="Awesome Component">
@@ -167,15 +190,16 @@ In order to use your Web Component, simply import this file in a project, and us
 ```
 
 ### Serve
-For development, you can serve the `AwesomeComponent.js` file using the command:
+For development, you can serve the `AwesomeComponent.js` file.  
+Simply start the dev-server by using
 ```console
-yarn run serve
+yarn start
 ```
 or
 ```console
-npm run serve
+npm start
 ```
-This will serve your file on `http://localhost:5000/AwesomeComponent.js`
+This will serve your file on `http://localhost:3000/AwesomeComponent.js`
 
 ## Update
 To update your project to the latest version of create-react-web-component, use the command:  
@@ -183,12 +207,13 @@ To update your project to the latest version of create-react-web-component, use 
 npx create-react-web-component --update
 ```
 This will update all configuration files to the newest version
-  - config/*
-  - scripts/*
+  
+  - config/config-overrides.js
   - src/utils/EventContext.tsx
   - src/utils/Styled.tsx
   - src/declarations.d.ts
   - src/index.tsx
+  - tsconfig.json
 
 ## Contributing
 
@@ -200,10 +225,10 @@ Pull requests are always welcome, and I'll do my best to do reviews as fast as I
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/Silind/create-react-web-component/blob/master/LICENSE)
+This project is licensed under the [MIT License](https://github.com/Silind-Software/create-react-web-component/blob/master/LICENSE)
 
 ## Get Help
 Read more about using Web Components with React on the [official React Docs](https://reactjs.org/docs/web-components.html)  
 
 - Contact me on [Twitter](https://twitter.com/silindsoftware)
-- If appropriate, [open an issue](https://github.com/Silind/create-react-web-component/issues/new) on GitHub
+- If appropriate, [open an issue](https://github.com/Silind-Software/create-react-web-component/issues/new) on GitHub
