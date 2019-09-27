@@ -43,7 +43,8 @@
     "to-string-loader": "^1.1.5",
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-silind": "^1.0.21",
-    "tslint-react": "^4.1.0"
+    "tslint-react": "^4.1.0",
+    "rimraf": "3.0.0"
   },
   "config-overrides-path": "config/config-overrides.js"
 }

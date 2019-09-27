@@ -6,6 +6,7 @@
 
 const EventHooksPlugin = require('event-hooks-webpack-plugin');
 const { PromiseTask } = require('event-hooks-webpack-plugin/lib/tasks');
+const rimraf = require('rimraf');
 const fs = require('fs');
 
 module.exports = function override(config, env) {
@@ -79,7 +80,7 @@ const copyBundleScript = async (env) => {
 
   fs.readdirSync('build').forEach((file) => {
     if (file !== '%component-name-pascal%.js') {
-      fs.unlinkSync(`build/${file}`);
+      rimraf.sync(`build/${file}`);
     }
   });
 };
