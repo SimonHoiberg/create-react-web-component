@@ -90,3 +90,5 @@ Object.keys(componentProperties).forEach((key: string) => {
 
 Object.defineProperties(%component-name-pascal%.prototype, propertyMap);
 customElements.define('%component-name-snake%', %component-name-pascal%);
+
+interface ICustomProperties extends IComponentAttributes, IComponentProperties {}
