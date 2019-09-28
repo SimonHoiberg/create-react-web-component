@@ -2,7 +2,7 @@
   "name": "create-react-web-component",
   "version": "2.0.0",
   "description": "Set up a React App wrapped in a Web Component",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "test": "jest"
   },
@@ -15,7 +15,8 @@
   "files": [
     "bin/*",
     "dist/*",
-    "template/*"
+    "template/*",
+    "config/*"
   ],
   "repository": {
     "type": "git",
@@ -53,6 +54,10 @@
     "collectCoverage": true
   },
   "dependencies": {
+    "@types/react": "^16.9.3",
+    "react": "^16.9.0",
+    "event-hooks-webpack-plugin": "^2.1.4",
+    "style-it": "^2.1.4",
     "@types/inquirer": "^6.5.0",
     "@types/mkdirp": "^0.5.2",
     "@types/ncp": "^2.0.1",

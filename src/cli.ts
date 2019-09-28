@@ -1,14 +1,7 @@
 import createProject from './createProject';
-import updateProject from './updateProject';
-import { checkArg } from './utils';
 
 export async function cli(args: string[]) {
   try {
-    if (args.length > 2 && checkArg(args[2])) {
-      updateProject();
-      return;
-    }
-
     createProject();
     
   } catch (err) {
@@ -17,4 +10,3 @@ export async function cli(args: string[]) {
     console.log('ERROR: ' + err.message);
   }
 }
-

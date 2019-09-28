@@ -40,7 +40,7 @@ const overrideOutput = (output) => {
 
   return {
     ...newOutput,
-    filename: '%component-name-pascal%.js',
+    filename: 'bundle.js',
   };
 };
 
@@ -79,7 +79,7 @@ const copyBundleScript = async (env) => {
   }
 
   fs.readdirSync('build').forEach((file) => {
-    if (file !== '%component-name-pascal%.js') {
+    if (file !== 'bundle.js') {
       rimraf.sync(`build/${file}`);
     }
   });

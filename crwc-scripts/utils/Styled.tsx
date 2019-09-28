@@ -99,5 +99,4 @@ const addVariableFallbacks = (styles: string) => {
   return newCssLines.join('\n');
 };
 
-export default Styled;
-export { withStyles };
+export { withStyles, Styled };

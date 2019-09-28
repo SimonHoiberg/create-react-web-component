@@ -1,4 +1,4 @@
-import { toTitleFormat, toPascalCase, toSnakeCase, checkArg } from '../utils';
+import { toTitleFormat, toPascalCase, toSnakeCase } from '../utils';
 
 const nameSnake = 'super-cool-component';
 const nameCamelCase = 'superCoolComponent';
@@ -44,36 +44,4 @@ describe('Name Formatters: snake-case', () => {
     const title = toSnakeCase(namePascalcase);
     expect(title).toEqual(nameSnake);
   });
-});
-
-describe('Check Arg function', () => {
-  it('should return true on "--update"', () => {
-    const isValidArg = checkArg('--update');
-
-    expect(isValidArg).toBeTruthy();
-  });
-
-  it('should return true on "-update"', () => {
-    const isValidArg = checkArg('-update');
-
-    expect(isValidArg).toBeTruthy();
-  });
-
-  it('should return true on "--u"', () => {
-    const isValidArg = checkArg('--u');
-
-    expect(isValidArg).toBeTruthy();
-  });
-
-  it('should return true on "-u"', () => {
-    const isValidArg = checkArg('-u');
-
-    expect(isValidArg).toBeTruthy();
-  });
-
-  it('should return false on non-valid arg', () => {
-    const isValidArg = checkArg('--nonesense');
-
-    expect(isValidArg).toBeFalsy();
-  })
 });

@@ -5,10 +5,11 @@
     "lib": ["es2017", "es7", "es6", "dom"],
     "declaration": true,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDirs": ["src, crwc-scripts"],
     "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "jsx": "react"
   },
   "exclude": [
     "node_modules",

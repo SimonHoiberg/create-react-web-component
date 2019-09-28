@@ -58,23 +58,3 @@ export async function changeNameInfile(file: string, changeWhere: RegExp, change
     });
   });
 }
-
-export function checkArg(arg: string): boolean {
-  if (arg === '--update') {
-    return true;
-  }
-
-  if (arg === '-update') {
-    return true;
-  }
-
-  if (arg === '--u') {
-    return true;
-  }
-
-  if (arg === '-u') {
-    return true;
-  }
-
-  return false;
-}

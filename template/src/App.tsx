@@ -1,7 +1,6 @@
 import React, { FC, useContext } from 'react';
+import { EventContext, Styled } from 'create-react-web-component';
 import { IComponentProperties, IComponentAttributes } from './componentProperties';
-import EventContext from './utils/EventContext';
-import Styled from './utils/Styled';
 import styles from './App.css';
 
 interface IProps extends IComponentProperties, IComponentAttributes {}

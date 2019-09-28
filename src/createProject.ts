@@ -79,7 +79,7 @@ async function promptForQuestions() {
 
 async function copyTemplate(projectName: string) {
   const currentDirectory = process.cwd();
-  const templateDirectory = fs.realpathSync(resolve(__dirname, '../template'));
+  const templateDirectory = fs.realpathSync(resolve(__dirname, '../../template'));
 
   const projectDirectory: string = await new Promise((resolve, reject) => {
     const projectDir = `${currentDirectory}/${projectName}`;
@@ -113,7 +113,6 @@ async function writeComponentName(projectDirectory: string, names: INames) {
   await changeNameInfile(`${projectDirectory}/src/index.tsx`, new RegExp(/%component-name-pascal%/g), names.pascal);
   await changeNameInfile(`${projectDirectory}/README.md`, new RegExp(/%component-name-title%/g), names.title);
   await changeNameInfile(`${projectDirectory}/README.md`, new RegExp(/%component-name-snake%/g), names.snake);
-  await changeNameInfile(`${projectDirectory}/config/config-overrides.js`, new RegExp(/%component-name-pascal%/g), names.pascal);
   await changeNameInfile(
     `${projectDirectory}/src/componentProperties.ts`,
     new RegExp(/%component-name-title%/g),

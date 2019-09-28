@@ -1,16 +1,10 @@
-/*!
- * Caution! You should not edit this file.
- *
- * Running 'create-react-web-component --update' will replace this file.
- */
-
 import '@webcomponents/webcomponentsjs/webcomponents-bundle.js';
 import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import root from 'react-shadow';
-import { EventProvider } from './utils/EventContext';
+import { EventProvider } from 'create-react-web-component';
 import {
   IComponentProperties,
   IComponentAttributes,
@@ -96,5 +90,3 @@ Object.keys(componentProperties).forEach((key: string) => {
 
 Object.defineProperties(%component-name-pascal%.prototype, propertyMap);
 customElements.define('%component-name-snake%', %component-name-pascal%);
-
-export default interface ICustomProperties extends IComponentAttributes, IComponentProperties {}
