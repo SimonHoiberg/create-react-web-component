@@ -4,7 +4,7 @@ import ncp from 'ncp';
 import mkdirp from 'mkdirp';
 import chalk from 'chalk';
 import { resolve } from 'path';
-import { toTitleFormat, toPascalCase, toSnakeCase, changeNameInfile, INames } from './utils';
+import { toTitleFormat, toPascalCase, toSnakeCase, changeNameInfile, INames } from '../utils/utils';
 
 export default async function createProject() {
   const options = (await promptForQuestions()) as any;
