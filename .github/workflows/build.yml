@@ -20,11 +20,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
+    - name: yarn install and test
       run: |
-        npm install
+        npm install yarn -g
         npm install codecov -g
-        npm test
+        yarn
+        yarn install-peer-deps
+        yarn test
         codecov
       env:
         CI: true

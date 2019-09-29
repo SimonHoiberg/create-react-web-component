@@ -4,7 +4,9 @@
   "description": "Set up a React App wrapped in a Web Component",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest --env=jest-environment-jsdom-fourteen"
+    "build": "yarn install-peer-deps && tsc",
+    "test": "jest --env=jest-environment-jsdom-fourteen",
+    "install-peer-deps": "node scripts/install-peer-deps.js"
   },
   "bin": {
     "create-react-web-component": "bin/create-react-web-component"
@@ -75,10 +77,10 @@
     "jest-environment-jsdom-fourteen": "^0.1.0"
   },
   "peerDependencies": {
-    "@types/react": "^16.9.3",
-    "@types/react-dom": "^16.9.1",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
-    "style-it": "^2.1.4"
+    "@types/react": "16.9.3",
+    "@types/react-dom": "16.9.1",
+    "react": "16.10.1",
+    "react-dom": "16.10.1",
+    "style-it": "2.1.4"
   }
 }
