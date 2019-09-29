@@ -17,7 +17,6 @@
 - [How it works](#how-it-works)
 - [**Getting Started**](#getting-started)
 - [Usage](#usage)
-- [Update](#update)
 - [Contributing](#contributing)
 - [License](#license)
 - [Get Help](#get-help)
@@ -98,7 +97,7 @@ In order to dispatch events that can be listened to from the Web Component, use 
 For example - if you want to dispatch a custom event 'my-event' that is triggered onClick, all you have to do is:  
 ```jsx
 import React, { FC, useContext } from 'react';
-import EventContext from './utils/EventContext';
+import { EventContext } from 'create-react-web-component';
 
 const App: FC = () => {
   const dispatch = useContext(EventContext);
@@ -130,7 +129,7 @@ There are two cases in how to style a component:
 **In the first case**, we wrap the component in the `<Styled>` component, and pass down the imported style as props:  
 ```jsx
 import React, { FC } from 'react';
-import Styled from './utils/Styled';
+import { Styled } from 'create-react-web-component';
 import styles from './App.css';
 
 const App: FC = () => {
@@ -151,7 +150,7 @@ Any children of the `<Styled>` component can now reference the styles.
 
 ```jsx
 import React, { FC } from 'react';
-import { withStyles } from './utils/Styled';
+import { withStyles } from 'create-react-web-component';
 import styles from './App.css';
 
 const App: FC = () => {
@@ -173,7 +172,7 @@ The `withStyles()` will add an extra `<div>` element around the content that it 
 
 ## Usage
 ### Build
-Build you component by running the command
+Build your component by running the command
 ```console
 yarn build
 ```
@@ -182,15 +181,22 @@ or
 npm run build
 ```
 
-This will create a `/build` folder containing a file with the name of your component, e.g. `AwesomeComponent.js`.  
+This will create a `/build` folder containing a file with the name of your component, e.g. `bundle.js`.  
 In order to use your Web Component, simply import this file in a project, and use your Web Component as:
 ```html
 <awesome-component componentTitle="Awesome Component">
 </awesome-component>
 ```
 
+### Static files
+A Web Component is a self-contained native component that runs within a shadowed scope in the DOM.  
+For the same reason, it is highly incovenient to bundle static files with the Web Component.  
+In order to use images or graphic, there are two options:
+- **Serve the images somewhere, and reference it in a url**: `<img src="https://some-cloud/some-image.png" />`
+- **Use SVG**: You can import SVG-files into the component. React will render these as SVG Elements inside the React App instead of loading them at runtime.
+
 ### Serve
-For development, you can serve the `AwesomeComponent.js` file.  
+For development, you can serve the `bundle.js` file.  
 Simply start the dev-server by using
 ```console
 yarn start
@@ -199,21 +205,7 @@ or
 ```console
 npm start
 ```
-This will serve your file on `http://localhost:3000/AwesomeComponent.js`
-
-## Update
-To update your project to the latest version of create-react-web-component, use the command:  
-```console
-npx create-react-web-component --update
-```
-This will update all configuration files to the newest version
-  
-  - config/config-overrides.js
-  - src/utils/EventContext.tsx
-  - src/utils/Styled.tsx
-  - src/declarations.d.ts
-  - src/index.tsx
-  - tsconfig.json
+This will serve your file on `http://localhost:3000/bundle.js`
 
 ## Contributing
 
