@@ -6,9 +6,9 @@
     "@types/node": "12.7.8",
     "@types/react": "^16.9.3",
     "@types/react-dom": "^16.9.1",
+    "create-react-web-component": "/home/simon/Documents/Silind/Web/Github/NPM/ReactWebComponent/create-react-web-component",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "create-react-web-component": "/home/simon/Documents/Silind/Web/Github/NPM/ReactWebComponent/create-react-web-component",
     "react-scripts": "3.1.2",
     "style-it": "^2.1.4",
     "typescript": "3.6.3"

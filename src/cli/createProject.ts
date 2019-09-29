@@ -4,7 +4,7 @@ import ncp from 'ncp';
 import mkdirp from 'mkdirp';
 import chalk from 'chalk';
 import { resolve } from 'path';
-import { toTitleFormat, toPascalCase, toSnakeCase, changeNameInfile, INames } from '../utils/utils';
+import { INames, toTitleFormat, toPascalCase, toSnakeCase, changeNameInfile, createDefaultName } from '../utils/utils';
 
 export default async function createProject() {
   const options = (await promptForQuestions()) as any;
@@ -54,15 +54,15 @@ async function promptForQuestions() {
       type: 'input',
       name: 'name',
       message: 'Choose a name for your component',
-      default: (current: any) => current.directory,
+      default: (current: any) => createDefaultName(current.directory),
       validate: function(value: string) {
-        const pass = /^[a-zA-Z]+((\d)|([A-Z0-9-][a-z0-9-]+))*([A-Z-])?$/.test(value);
+        const pass = /(\w+-)+\w+/.test(value);
 
         if (pass) {
           return true;
         }
 
-        return 'Name must be camelCase, PascalCase or snake-case';
+        return 'Name must be snake-case and must contain at least two words';
       },
     },
     {
@@ -83,7 +83,7 @@ async function copyTemplate(projectName: string) {
 
   const projectDirectory: string = await new Promise((resolve, reject) => {
     const projectDir = `${currentDirectory}/${projectName}`;
-    mkdirp(projectDir, err => {
+    mkdirp(projectDir, (err) => {
       if (err) {
         reject('Could not create directory: ' + projectDir);
       }
@@ -93,7 +93,7 @@ async function copyTemplate(projectName: string) {
   });
 
   await new Promise((resolve, reject) => {
-    ncp.ncp(templateDirectory, projectDirectory, err => {
+    ncp.ncp(templateDirectory, projectDirectory, (err) => {
       if (err) {
         reject('Could not copy template files');
       }

@@ -1,9 +1,3 @@
-/*!
- * Caution! You should not edit this file.
- *
- * Running 'create-react-web-component --update' will replace this file.
- */
-
 import React, { FC, Component, ReactNode, ComponentClass, CSSProperties } from 'react';
 import Style from 'style-it';
 
@@ -47,15 +41,14 @@ const withStyles = (styles: CSSProperties) => <P, S>(WrappedComponent: Component
  * Strips away warning comment at the top
  * @param styles styles to strip comments from
  */
-const stripCommentsAndSelectors = (styles: string): string => {
+export const stripCommentsAndSelectors = (styles: string): string => {
   const placeholderComment = `
     /*
     * -
     */
   `;
 
-  const stylesWithoutRootSelector = styles.replace(/:root/g, '');
-  const stylesWithoutComments = stylesWithoutRootSelector.replace(
+  const stylesWithoutComments = styles.replace(
     /\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*\/+/gm,
     placeholderComment,
   );
@@ -64,12 +57,13 @@ const stripCommentsAndSelectors = (styles: string): string => {
 };
 
 /**
- * Adds css variable fallback for IE11 support
+ * Adds css variable fallback for legacy browsers
  * @param styles styles to add fallback to
  */
-const addVariableFallbacks = (styles: string) => {
+export const addVariableFallbacks = (styles: string): string => {
+  const stylesWithoutRootSelector = styles.replace(/:root/g, '');
   const variableMap = new Map();
-  const originalCssLines = styles.split('\n');
+  const originalCssLines = stylesWithoutRootSelector.split('\n');
   const newCssLines: string[] = [];
 
   originalCssLines.forEach((cssLine: string) => {

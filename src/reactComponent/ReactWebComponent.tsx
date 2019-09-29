@@ -59,35 +59,19 @@ export class ReactWebComponent {
 
   private static validateDependencies() {
     if (!componentAttributes) {
-      throw Error(
-        `
-        Cannot define custom element: Attributes have not been set.
-        `
-      );
+      throw Error('Cannot define custom element: Attributes have not been set.');
     }
 
     if (!componentProperties) {
-      throw Error(
-        `
-        Cannot define custom element: Properties have not been set.
-        `
-      );
+      throw Error('Cannot define custom element: Properties have not been set.');
     }
 
     if (!rootComponent) {
-      throw Error(
-        `
-        Cannot define custom element: Root Component have not been set.
-        `
-      );
+      throw Error('Cannot define custom element: Root Component have not been set.');
     }
 
     if (!elementName) {
-      throw Error(
-        `
-        Cannot define custom element: Element name has not been set.
-        `
-      );
+      throw Error('Cannot define custom element: Element name has not been set.');
     }
   }
 }

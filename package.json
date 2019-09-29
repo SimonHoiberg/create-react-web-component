@@ -4,7 +4,7 @@
   "description": "Set up a React App wrapped in a Web Component",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --env=jest-environment-jsdom-fourteen"
   },
   "bin": {
     "create-react-web-component": "bin/create-react-web-component"
@@ -36,6 +36,7 @@
   "jest": {
     "moduleFileExtensions": [
       "ts",
+      "tsx",
       "js"
     ],
     "transform": {
@@ -43,6 +44,9 @@
     },
     "testMatch": [
       "**/**/*.test.(ts|tsx)"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/template"
     ],
     "collectCoverage": true
   },
@@ -67,7 +71,8 @@
     "@types/node": "^12.0.12",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "jest-environment-jsdom-fourteen": "^0.1.0"
   },
   "peerDependencies": {
     "@types/react": "^16.9.3",

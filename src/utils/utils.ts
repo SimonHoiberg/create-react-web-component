@@ -58,3 +58,13 @@ export async function changeNameInfile(file: string, changeWhere: RegExp, change
     });
   });
 }
+
+export function createDefaultName(name: string) {
+  const snakeName = toSnakeCase(name);
+
+  if (!snakeName.includes('-')) {
+    return `${snakeName}-component`
+  }
+
+  return snakeName;
+}
