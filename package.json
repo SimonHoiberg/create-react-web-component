@@ -1,6 +1,6 @@
 {
   "name": "create-react-web-component",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Set up a React App wrapped in a Web Component",
   "main": "dist/index.js",
   "scripts": {
@@ -58,6 +58,7 @@
     "@types/ncp": "^2.0.1",
     "@types/rimraf": "^2.0.2",
     "@webcomponents/webcomponentsjs": "^2.3.0",
+    "@svgr/webpack": "4.3.2",
     "chalk": "^2.4.2",
     "deepmerge": "^4.0.0",
     "esm": "^3.2.25",

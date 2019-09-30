@@ -32,6 +32,11 @@ const overrideModule = (module) => {
     };
   }
 
+  module.rules[2].oneOf.unshift({
+    test: /\.svg$/,
+    use: ['@svgr/webpack'],
+  });
+
   return module;
 };
 
