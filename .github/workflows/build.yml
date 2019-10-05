@@ -1,4 +1,4 @@
-name: Build
+name: build
 
 on:
   push:
@@ -6,27 +6,36 @@ on:
     - master
 
 jobs:
-  test:
+  build:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x]
-
     steps:
     - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - name: yarn install and test
+        node-version: 10.x
+        registry-url: 'https://registry.npmjs.org'
+      
+    - name: Install
       run: |
         npm install yarn -g
         npm install codecov -g
-        yarn
+        npm install typescript -g
+        yarn install
         yarn install-peer-deps
+
+    - name: Test
+      run: |
         yarn test
         codecov
+
+    - name: Build
+      run: |
+        tsc --build
+
+    - name: Publish to NPM
+      run: npm publish
       env:
-        CI: true
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+  

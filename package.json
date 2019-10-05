@@ -1,6 +1,6 @@
 {
   "name": "create-react-web-component",
-  "version": "2.0.4",
+  "version": "2.0.7",
   "description": "Set up a React App wrapped in a Web Component",
   "main": "dist/index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "web-component",
     "typescript"
   ],
-  "author": "Silind Software",
+  "author": "Silind Software <contact@silind.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Silind-Software/create-react-web-component/issues"
