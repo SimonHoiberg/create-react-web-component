@@ -7,18 +7,21 @@ To understand the difference between properties and attributes,
 please refer to this article:
 https://alligator.io/web-components/attributes-properties/
 */
+import PropTypes from 'prop-types';
 
 /**
- * Update this interface to reflect the types of the properties
+ * Update proptypes to reflect the types of the properties and attributes
+* NB: The type of an attribute must be primitive
  */
-export interface IComponentProperties {
-  todos: string[];
-}
+export const propTypes = {
+  todos: PropTypes.array,
+  componentTitle: PropTypes.string,
+};
 
 /**
  * Update this object with the initial values of the properties
  */
-export const componentProperties: IComponentProperties = {
+export const componentProperties = {
   todos: [
     'Go to src/componentProperties.ts...',
     'Register properties and attributes...',
@@ -27,16 +30,8 @@ export const componentProperties: IComponentProperties = {
 };
 
 /**
- * Update this interface to reflect the attributes of the Web Component
- * NB: The type of an attribute is always a string
- */
-export interface IComponentAttributes {
-  componentTitle: string;
-}
-
-/**
  * Update this object with the initial values of the attributes
  */
-export const componentAttributes: IComponentAttributes = {
+export const componentAttributes = {
   componentTitle: '%component-name-title%',
 };

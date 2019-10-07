@@ -7,15 +7,17 @@ import { resolve } from 'path';
 import { INames, toTitleFormat, toPascalCase, toSnakeCase, changeNameInfile, createDefaultName } from '../utils/utils';
 
 export default async function createProject() {
-  const options = (await promptForQuestions()) as any;
+  const options = await promptForQuestions() as any;
   const names = {
     title: toTitleFormat(options.name),
     pascal: toPascalCase(options.name),
     snake: toSnakeCase(options.name),
   };
 
-  const projectDirectory = await copyTemplate(options.directory);
-  await writeComponentName(projectDirectory, names);
+  const language = await promptForLanguage();
+
+  const projectDirectory = await copyTemplate(options.directory, language.language as string);
+  await writeComponentName(projectDirectory, names, language.language as string);
   await writeProjectDescription(projectDirectory, options.description);
 
   const finishedMessage = `
@@ -77,9 +79,32 @@ async function promptForQuestions() {
   return options;
 }
 
-async function copyTemplate(projectName: string) {
+async function promptForLanguage() {
+  const questions = [
+    {
+      type: 'list',
+      name: 'language',
+      message: 'Which language do you want to use?',
+      choices: [
+        {
+          value: 'js',
+          name: 'JavaScript',
+        },
+        {
+          value: 'ts',
+          name: 'TypeScript',
+        },
+      ],
+    },
+  ];
+
+  console.log('');
+  return inquirer.prompt(questions);
+}
+
+async function copyTemplate(projectName: string, language: string) {
   const currentDirectory = process.cwd();
-  const templateDirectory = fs.realpathSync(resolve(__dirname, '../../template'));
+  const templateDirectory = fs.realpathSync(resolve(__dirname, `../../templates/${language}`));
 
   const projectDirectory: string = await new Promise((resolve, reject) => {
     const projectDir = `${currentDirectory}/${projectName}`;
@@ -105,19 +130,30 @@ async function copyTemplate(projectName: string) {
   return projectDirectory;
 }
 
-async function writeComponentName(projectDirectory: string, names: INames) {
+async function writeComponentName(projectDirectory: string, names: INames, language: string) {
   await changeNameInfile(`${projectDirectory}/public/index.html`, new RegExp(/%component-name-title%/g), names.title);
   await changeNameInfile(`${projectDirectory}/public/index.html`, new RegExp(/%component-name-snake%/g), names.snake);
   await changeNameInfile(`${projectDirectory}/package.json`, new RegExp(/%component-name-snake%/g), names.snake);
-  await changeNameInfile(`${projectDirectory}/src/index.tsx`, new RegExp(/%component-name-snake%/g), names.snake);
-  await changeNameInfile(`${projectDirectory}/src/index.tsx`, new RegExp(/%component-name-pascal%/g), names.pascal);
   await changeNameInfile(`${projectDirectory}/README.md`, new RegExp(/%component-name-title%/g), names.title);
   await changeNameInfile(`${projectDirectory}/README.md`, new RegExp(/%component-name-snake%/g), names.snake);
-  await changeNameInfile(
-    `${projectDirectory}/src/componentProperties.ts`,
-    new RegExp(/%component-name-title%/g),
-    names.title,
-  );
+
+  if (language === 'js') {
+    await changeNameInfile(`${projectDirectory}/src/index.js`, new RegExp(/%component-name-snake%/g), names.snake);
+    await changeNameInfile(
+      `${projectDirectory}/src/componentProperties.js`,
+      new RegExp(/%component-name-title%/g),
+      names.title,
+    );
+  }
+
+  if (language === 'ts') {
+    await changeNameInfile(`${projectDirectory}/src/index.tsx`, new RegExp(/%component-name-snake%/g), names.snake);
+    await changeNameInfile(
+      `${projectDirectory}/src/componentProperties.ts`,
+      new RegExp(/%component-name-title%/g),
+      names.title,
+    );
+  }  
 }
 
 async function writeProjectDescription(projectDirectory: string, description: string) {
