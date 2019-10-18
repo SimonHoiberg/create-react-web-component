@@ -1,3 +1,8 @@
+/**
+ * This script will install all peer dependencies
+ * These will not be installed using yarn install or npm install, and needs to be installed manually
+ */
+
 const { execSync } = require('child_process');
 const fs = require('fs');
 

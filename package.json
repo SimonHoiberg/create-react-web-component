@@ -1,13 +1,15 @@
 {
   "name": "create-react-web-component",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "Set up a React App wrapped in a Web Component",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest --env=jest-environment-jsdom-fourteen",
     "install-peer-deps": "node scripts/install-peer-deps.js",
-    "update-version": "node scripts/update-version.js"
+    "update-version": "node scripts/update-version.js",
+    "cleanup": "node scripts/cleanup.js",
+    "build-link": "node scripts/build-link.js"
   },
   "bin": {
     "create-react-web-component": "bin/create-react-web-component"

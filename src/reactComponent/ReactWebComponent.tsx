@@ -1,4 +1,4 @@
-import CustomComponent, { setComponentAttributes, setComponentProperties, setRootComponent } from './CustomComponent';
+import CustomComponent, { setComponentAttributes, setComponentProperties, setRootComponent, setMode } from './CustomComponent';
 
 let componentAttributes: any | null = null;
 let componentProperties: any | null = null;
@@ -14,7 +14,7 @@ export class ReactWebComponent {
     componentProperties = properties;
   }
 
-  public static render(App: React.FunctionComponent<any>, name: string) {
+  public static render(App: React.FunctionComponent<any>, name: string, option?: { shadow: boolean }) {
     rootComponent = App;
     elementName = name;
 
@@ -23,6 +23,10 @@ export class ReactWebComponent {
     setComponentAttributes(componentAttributes);
     setComponentProperties(componentProperties);
     setRootComponent(rootComponent);
+
+    if (option) {
+      setMode(option.shadow);
+    }
 
     this.setComponentProperties();
 

@@ -1,3 +1,11 @@
+/**
+ * This script will set the version of create-react-web-component.
+ * Use this script when you want to update create-react-web-component.
+ * 
+ * - The package.json of the js template will be change
+ * - The package.json of the ts template will change
+ */
+
 const fs = require('fs');
 
 const version = process.argv[2];

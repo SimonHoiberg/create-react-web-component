@@ -9,18 +9,23 @@ import { EventProvider } from '../components/EventContext';
 let componentAttributes: any;
 let componentProperties: any;
 let rootComponent: React.FunctionComponent<any>;
+let shadow: boolean | undefined;
 
 export const setComponentAttributes = (attributes: any) => {
-  componentAttributes = attributes
+  componentAttributes = attributes;
 };
 
 export const setComponentProperties = (properties: any) => {
   componentProperties = properties;
-}
+};
 
 export const setRootComponent = (component: React.FunctionComponent<any>) => {
   rootComponent = component;
-}
+};
+
+export const setMode = (shadowOption: boolean) => {
+  shadow = shadowOption;
+};
 
 class CustomComponent extends HTMLElement {
   public static get observedAttributes() {
@@ -64,14 +69,17 @@ class CustomComponent extends HTMLElement {
   }
 
   private mountReactApp() {
-    ReactDOM.render(
-      <root.div>
-        <EventProvider value={this.eventDispatcher}>
-          {React.createElement(rootComponent, this.reactProps())}
-        </EventProvider>
-      </root.div>,
-      this,
+    const application = (
+      <EventProvider value={this.eventDispatcher}>
+        {React.createElement(rootComponent, this.reactProps())}
+      </EventProvider>
     );
+
+    if (shadow !== undefined && !shadow) {
+      ReactDOM.render(application, this);
+    } else {
+      ReactDOM.render(<root.div>{application}</root.div>, this);
+    }
   }
 
   private eventDispatcher = (event: Event) => {
