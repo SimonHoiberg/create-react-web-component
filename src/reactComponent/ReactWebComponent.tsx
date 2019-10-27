@@ -3,7 +3,7 @@ import CustomComponent, { setComponentAttributes, setComponentProperties, setRoo
 let componentAttributes: any | null = null;
 let componentProperties: any | null = null;
 let elementName: string | null = null;
-let rootComponent: React.FunctionComponent<any> | null = null;
+let rootComponent: React.FC<any> | React.ComponentClass<any, any> | null = null;
 
 export class ReactWebComponent {
   public static setAttributes(attributes: any) {
@@ -14,7 +14,7 @@ export class ReactWebComponent {
     componentProperties = properties;
   }
 
-  public static render(App: React.FunctionComponent<any>, name: string, option?: { shadow: boolean }) {
+  public static render(App: React.FC<any> | React.ComponentClass<any, any>, name: string, option?: { shadow: boolean }) {
     rootComponent = App;
     elementName = name;
 
@@ -29,7 +29,6 @@ export class ReactWebComponent {
     }
 
     this.setComponentProperties();
-
     customElements.define(elementName, CustomComponent);
   }
 

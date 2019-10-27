@@ -8,7 +8,7 @@ import { EventProvider } from '../components/EventContext';
 
 let componentAttributes: any;
 let componentProperties: any;
-let rootComponent: React.FunctionComponent<any>;
+let rootComponent: React.FC<any> | React.ComponentClass<any, any>;
 let shadow: boolean | undefined;
 
 export const setComponentAttributes = (attributes: any) => {
@@ -19,7 +19,7 @@ export const setComponentProperties = (properties: any) => {
   componentProperties = properties;
 };
 
-export const setRootComponent = (component: React.FunctionComponent<any>) => {
+export const setRootComponent = (component: React.FC<any> | React.ComponentClass<any, any>) => {
   rootComponent = component;
 };
 
@@ -29,7 +29,7 @@ export const setMode = (shadowOption: boolean) => {
 
 class CustomComponent extends HTMLElement {
   public static get observedAttributes() {
-    return Object.keys(componentAttributes);
+    return Object.keys(componentAttributes).map((k) => k.toLowerCase());
   }
 
   private reactProps(): any {
