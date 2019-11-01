@@ -1,5 +1,5 @@
 {
-  "name": "v2-pure-js",
+  "name": "%component-name-snake%",
   "version": "0.1.0",
   "private": true,
   "scripts": {
