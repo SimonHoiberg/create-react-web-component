@@ -78,7 +78,6 @@ class CustomComponent extends HTMLElement {
     if (shadow !== undefined && !shadow) {
       ReactDOM.render(application, this);
     } else {
-      // We use createProxy to be able to use a polyfill if needed.
       const root = createProxy({ div: undefined });
       ReactDOM.render(<root.div>{application}</root.div>, this);
     }
