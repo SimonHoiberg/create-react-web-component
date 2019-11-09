@@ -12,7 +12,7 @@
     "react-dom": "16.10.2",
     "react-scripts": "3.2.0",
     "style-it": "2.1.4",
-    "create-react-web-component": "2.0.16"
+    "create-react-web-component": "2.0.17"
   },
   "devDependencies": {
     "jest-environment-jsdom-fourteen": "0.1.0",

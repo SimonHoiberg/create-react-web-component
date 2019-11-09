@@ -5,13 +5,20 @@
 ![Build Status](https://github.com/Silind-Software/create-react-web-component/workflows/build/badge.svg)
 ![Code Coverage](https://img.shields.io/codecov/c/github/Silind-Software/create-react-web-component)
 
-## [Official webpage](https://create-react-web-component.com/)
+<p align="center">
+  <img src="https://www.pe.com/wp-content/uploads/2018/01/rpe-bus-bestlaw-warning.jpg?w=544" />
+</p>
+
+<h3 style="text-align: center; color: #6b2c2c">This project has been deprecated, and will no longer be maintained!</h3>
+<h1 style="text-align: center">The project is now carried on at <a href="https://github.com/Silind-Software/direflow">Direflow</a></h1>
+
+<br />
+<br />
+<br />
 
 #### Set up a React App wrapped in a Web Component
 > This setup is is based on [*react-scripts*](https://www.npmjs.com/package/react-scripts) from [*create-react-app*](https://create-react-app.dev/docs/getting-started)  
 > A thorough description of the principles used in this setup, can be read [in this article](https://itnext.io/react-and-web-components-3e0fca98a593)
-
-
 
 <p align="center">
   <img src="https://silind-s3.s3.eu-west-2.amazonaws.com/create-react-web-component-demo/create-react-web-component-demo2.gif" />
